@@ -1,37 +1,121 @@
 # this is an auto generated file. This will be overwritten
-mutation CreateTodo(
-  $input: CreateTodoInput!
-  $condition: ModelTodoConditionInput
+mutation CreateHSKLevel(
+  $input: CreateHSKLevelInput!
+  $condition: ModelHSKLevelConditionInput
 ) {
-  createTodo(input: $input, condition: $condition) {
+  createHSKLevel(input: $input, condition: $condition) {
     id
-    name
-    description
+    level
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
-mutation UpdateTodo(
-  $input: UpdateTodoInput!
-  $condition: ModelTodoConditionInput
+mutation UpdateHSKLevel(
+  $input: UpdateHSKLevelInput!
+  $condition: ModelHSKLevelConditionInput
 ) {
-  updateTodo(input: $input, condition: $condition) {
+  updateHSKLevel(input: $input, condition: $condition) {
     id
-    name
-    description
+    level
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
-mutation DeleteTodo(
-  $input: DeleteTodoInput!
-  $condition: ModelTodoConditionInput
+mutation DeleteHSKLevel(
+  $input: DeleteHSKLevelInput!
+  $condition: ModelHSKLevelConditionInput
 ) {
-  deleteTodo(input: $input, condition: $condition) {
+  deleteHSKLevel(input: $input, condition: $condition) {
     id
-    name
-    description
+    level
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+mutation CreateChineseWord(
+  $input: CreateChineseWordInput!
+  $condition: ModelChineseWordConditionInput
+) {
+  createChineseWord(input: $input, condition: $condition) {
+    id
+    character
+    pinyin
+    sound
+    HSKLevel {
+      id
+      level
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    chineseWordHSKLevelId
+  }
+}
+mutation UpdateChineseWord(
+  $input: UpdateChineseWordInput!
+  $condition: ModelChineseWordConditionInput
+) {
+  updateChineseWord(input: $input, condition: $condition) {
+    id
+    character
+    pinyin
+    sound
+    HSKLevel {
+      id
+      level
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    chineseWordHSKLevelId
+  }
+}
+mutation DeleteChineseWord(
+  $input: DeleteChineseWordInput!
+  $condition: ModelChineseWordConditionInput
+) {
+  deleteChineseWord(input: $input, condition: $condition) {
+    id
+    character
+    pinyin
+    sound
+    HSKLevel {
+      id
+      level
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    chineseWordHSKLevelId
   }
 }

@@ -1,28 +1,109 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateTodo {
-  onCreateTodo {
+subscription OnCreateHSKLevel($filter: ModelSubscriptionHSKLevelFilterInput) {
+  onCreateHSKLevel(filter: $filter) {
     id
-    name
-    description
+    level
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
-subscription OnUpdateTodo {
-  onUpdateTodo {
+subscription OnUpdateHSKLevel($filter: ModelSubscriptionHSKLevelFilterInput) {
+  onUpdateHSKLevel(filter: $filter) {
     id
-    name
-    description
+    level
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
-subscription OnDeleteTodo {
-  onDeleteTodo {
+subscription OnDeleteHSKLevel($filter: ModelSubscriptionHSKLevelFilterInput) {
+  onDeleteHSKLevel(filter: $filter) {
     id
-    name
-    description
+    level
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+subscription OnCreateChineseWord(
+  $filter: ModelSubscriptionChineseWordFilterInput
+) {
+  onCreateChineseWord(filter: $filter) {
+    id
+    character
+    pinyin
+    sound
+    HSKLevel {
+      id
+      level
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    chineseWordHSKLevelId
+  }
+}
+subscription OnUpdateChineseWord(
+  $filter: ModelSubscriptionChineseWordFilterInput
+) {
+  onUpdateChineseWord(filter: $filter) {
+    id
+    character
+    pinyin
+    sound
+    HSKLevel {
+      id
+      level
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    chineseWordHSKLevelId
+  }
+}
+subscription OnDeleteChineseWord(
+  $filter: ModelSubscriptionChineseWordFilterInput
+) {
+  onDeleteChineseWord(filter: $filter) {
+    id
+    character
+    pinyin
+    sound
+    HSKLevel {
+      id
+      level
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    chineseWordHSKLevelId
   }
 }

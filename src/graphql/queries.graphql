@@ -1,26 +1,147 @@
 # this is an auto generated file. This will be overwritten
-query GetTodo($id: ID!) {
-  getTodo(id: $id) {
+query GetHSKLevel($id: ID!) {
+  getHSKLevel(id: $id) {
     id
-    name
-    description
+    level
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
-query ListTodos(
-  $filter: ModelTodoFilterInput
+query ListHSKLevels(
+  $filter: ModelHSKLevelFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listHSKLevels(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      name
-      description
+      level
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
     nextToken
+    startedAt
+  }
+}
+query SyncHSKLevels(
+  $filter: ModelHSKLevelFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncHSKLevels(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      level
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetChineseWord($id: ID!) {
+  getChineseWord(id: $id) {
+    id
+    character
+    pinyin
+    sound
+    HSKLevel {
+      id
+      level
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    chineseWordHSKLevelId
+  }
+}
+query ListChineseWords(
+  $filter: ModelChineseWordFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listChineseWords(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      character
+      pinyin
+      sound
+      HSKLevel {
+        id
+        level
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      chineseWordHSKLevelId
+    }
+    nextToken
+    startedAt
+  }
+}
+query SyncChineseWords(
+  $filter: ModelChineseWordFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncChineseWords(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      character
+      pinyin
+      sound
+      HSKLevel {
+        id
+        level
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      chineseWordHSKLevelId
+    }
+    nextToken
+    startedAt
   }
 }

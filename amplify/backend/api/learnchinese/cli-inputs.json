@@ -3,10 +3,20 @@
   "serviceConfiguration": {
     "apiName": "learnchinese",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/Users/sudomoniker/Projects/learn-chinese/amplify/backend/api/learnchinese/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
-      "expirationTime": 7
-    }
+      "keyDescription": "api key description",
+      "expirationTime": 30
+    },
+    "conflictResolution": {
+      "defaultResolutionStrategy": {
+        "type": "AUTOMERGE"
+      }
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "AWS_IAM"
+      }
+    ]
   }
 }
