@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { APIService } from '../API.service';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +7,10 @@ import { APIService } from '../API.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private api: APIService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.api.ListChineseWords().then((response) => {
-      console.log(response)
-    })
+    
   }
 
 }

@@ -10,25 +10,29 @@ export interface SubscriptionResponse<T> {
 }
 
 export type __SubscriptionContainer = {
-  onCreateHSKLevel: OnCreateHSKLevelSubscription;
-  onUpdateHSKLevel: OnUpdateHSKLevelSubscription;
-  onDeleteHSKLevel: OnDeleteHSKLevelSubscription;
+  onCreateTags: OnCreateTagsSubscription;
+  onUpdateTags: OnUpdateTagsSubscription;
+  onDeleteTags: OnDeleteTagsSubscription;
   onCreateChineseWord: OnCreateChineseWordSubscription;
   onUpdateChineseWord: OnUpdateChineseWordSubscription;
   onDeleteChineseWord: OnDeleteChineseWordSubscription;
 };
 
-export type CreateHSKLevelInput = {
+export type CreateTagsInput = {
   id?: string | null;
-  level?: string | null;
+  tagName?: string | null;
+  tagDescription?: string | null;
+  chinesewordID: string;
   _version?: number | null;
 };
 
-export type ModelHSKLevelConditionInput = {
-  level?: ModelStringInput | null;
-  and?: Array<ModelHSKLevelConditionInput | null> | null;
-  or?: Array<ModelHSKLevelConditionInput | null> | null;
-  not?: ModelHSKLevelConditionInput | null;
+export type ModelTagsConditionInput = {
+  tagName?: ModelStringInput | null;
+  tagDescription?: ModelStringInput | null;
+  chinesewordID?: ModelIDInput | null;
+  and?: Array<ModelTagsConditionInput | null> | null;
+  or?: Array<ModelTagsConditionInput | null> | null;
+  not?: ModelTagsConditionInput | null;
 };
 
 export type ModelStringInput = {
@@ -70,47 +74,6 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
-export type HSKLevel = {
-  __typename: "HSKLevel";
-  id: string;
-  level?: string | null;
-  createdAt: string;
-  updatedAt: string;
-  _version: number;
-  _deleted?: boolean | null;
-  _lastChangedAt: number;
-};
-
-export type UpdateHSKLevelInput = {
-  id: string;
-  level?: string | null;
-  _version?: number | null;
-};
-
-export type DeleteHSKLevelInput = {
-  id: string;
-  _version?: number | null;
-};
-
-export type CreateChineseWordInput = {
-  id?: string | null;
-  character: string;
-  pinyin: string;
-  sound: string;
-  _version?: number | null;
-  chineseWordHSKLevelId?: string | null;
-};
-
-export type ModelChineseWordConditionInput = {
-  character?: ModelStringInput | null;
-  pinyin?: ModelStringInput | null;
-  sound?: ModelStringInput | null;
-  and?: Array<ModelChineseWordConditionInput | null> | null;
-  or?: Array<ModelChineseWordConditionInput | null> | null;
-  not?: ModelChineseWordConditionInput | null;
-  chineseWordHSKLevelId?: ModelIDInput | null;
-};
-
 export type ModelIDInput = {
   ne?: string | null;
   eq?: string | null;
@@ -127,19 +90,71 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null;
 };
 
+export type Tags = {
+  __typename: "Tags";
+  id: string;
+  tagName?: string | null;
+  tagDescription?: string | null;
+  chinesewordID: string;
+  createdAt: string;
+  updatedAt: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+};
+
+export type UpdateTagsInput = {
+  id: string;
+  tagName?: string | null;
+  tagDescription?: string | null;
+  chinesewordID?: string | null;
+  _version?: number | null;
+};
+
+export type DeleteTagsInput = {
+  id: string;
+  _version?: number | null;
+};
+
+export type CreateChineseWordInput = {
+  id?: string | null;
+  character: string;
+  pinyin: string;
+  sound: string;
+  tags?: string | null;
+  _version?: number | null;
+};
+
+export type ModelChineseWordConditionInput = {
+  character?: ModelStringInput | null;
+  pinyin?: ModelStringInput | null;
+  sound?: ModelStringInput | null;
+  tags?: ModelStringInput | null;
+  and?: Array<ModelChineseWordConditionInput | null> | null;
+  or?: Array<ModelChineseWordConditionInput | null> | null;
+  not?: ModelChineseWordConditionInput | null;
+};
+
 export type ChineseWord = {
   __typename: "ChineseWord";
   id: string;
   character: string;
   pinyin: string;
   sound: string;
-  HSKLevel?: HSKLevel | null;
+  tags?: string | null;
+  Tags?: ModelTagsConnection | null;
   createdAt: string;
   updatedAt: string;
   _version: number;
   _deleted?: boolean | null;
   _lastChangedAt: number;
-  chineseWordHSKLevelId?: string | null;
+};
+
+export type ModelTagsConnection = {
+  __typename: "ModelTagsConnection";
+  items: Array<Tags | null>;
+  nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type UpdateChineseWordInput = {
@@ -147,8 +162,8 @@ export type UpdateChineseWordInput = {
   character?: string | null;
   pinyin?: string | null;
   sound?: string | null;
+  tags?: string | null;
   _version?: number | null;
-  chineseWordHSKLevelId?: string | null;
 };
 
 export type DeleteChineseWordInput = {
@@ -156,19 +171,14 @@ export type DeleteChineseWordInput = {
   _version?: number | null;
 };
 
-export type ModelHSKLevelFilterInput = {
+export type ModelTagsFilterInput = {
   id?: ModelIDInput | null;
-  level?: ModelStringInput | null;
-  and?: Array<ModelHSKLevelFilterInput | null> | null;
-  or?: Array<ModelHSKLevelFilterInput | null> | null;
-  not?: ModelHSKLevelFilterInput | null;
-};
-
-export type ModelHSKLevelConnection = {
-  __typename: "ModelHSKLevelConnection";
-  items: Array<HSKLevel | null>;
-  nextToken?: string | null;
-  startedAt?: number | null;
+  tagName?: ModelStringInput | null;
+  tagDescription?: ModelStringInput | null;
+  chinesewordID?: ModelIDInput | null;
+  and?: Array<ModelTagsFilterInput | null> | null;
+  or?: Array<ModelTagsFilterInput | null> | null;
+  not?: ModelTagsFilterInput | null;
 };
 
 export type ModelChineseWordFilterInput = {
@@ -176,10 +186,10 @@ export type ModelChineseWordFilterInput = {
   character?: ModelStringInput | null;
   pinyin?: ModelStringInput | null;
   sound?: ModelStringInput | null;
+  tags?: ModelStringInput | null;
   and?: Array<ModelChineseWordFilterInput | null> | null;
   or?: Array<ModelChineseWordFilterInput | null> | null;
   not?: ModelChineseWordFilterInput | null;
-  chineseWordHSKLevelId?: ModelIDInput | null;
 };
 
 export type ModelChineseWordConnection = {
@@ -189,56 +199,12 @@ export type ModelChineseWordConnection = {
   startedAt?: number | null;
 };
 
-export type ModelSubscriptionHSKLevelFilterInput = {
-  id?: ModelSubscriptionIDInput | null;
-  level?: ModelSubscriptionStringInput | null;
-  and?: Array<ModelSubscriptionHSKLevelFilterInput | null> | null;
-  or?: Array<ModelSubscriptionHSKLevelFilterInput | null> | null;
-};
-
-export type ModelSubscriptionIDInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  in?: Array<string | null> | null;
-  notIn?: Array<string | null> | null;
-};
-
-export type ModelSubscriptionStringInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  in?: Array<string | null> | null;
-  notIn?: Array<string | null> | null;
-};
-
-export type ModelSubscriptionChineseWordFilterInput = {
-  id?: ModelSubscriptionIDInput | null;
-  character?: ModelSubscriptionStringInput | null;
-  pinyin?: ModelSubscriptionStringInput | null;
-  sound?: ModelSubscriptionStringInput | null;
-  and?: Array<ModelSubscriptionChineseWordFilterInput | null> | null;
-  or?: Array<ModelSubscriptionChineseWordFilterInput | null> | null;
-};
-
-export type CreateHSKLevelMutation = {
-  __typename: "HSKLevel";
+export type CreateTagsMutation = {
+  __typename: "Tags";
   id: string;
-  level?: string | null;
+  tagName?: string | null;
+  tagDescription?: string | null;
+  chinesewordID: string;
   createdAt: string;
   updatedAt: string;
   _version: number;
@@ -246,10 +212,12 @@ export type CreateHSKLevelMutation = {
   _lastChangedAt: number;
 };
 
-export type UpdateHSKLevelMutation = {
-  __typename: "HSKLevel";
+export type UpdateTagsMutation = {
+  __typename: "Tags";
   id: string;
-  level?: string | null;
+  tagName?: string | null;
+  tagDescription?: string | null;
+  chinesewordID: string;
   createdAt: string;
   updatedAt: string;
   _version: number;
@@ -257,10 +225,12 @@ export type UpdateHSKLevelMutation = {
   _lastChangedAt: number;
 };
 
-export type DeleteHSKLevelMutation = {
-  __typename: "HSKLevel";
+export type DeleteTagsMutation = {
+  __typename: "Tags";
   id: string;
-  level?: string | null;
+  tagName?: string | null;
+  tagDescription?: string | null;
+  chinesewordID: string;
   createdAt: string;
   updatedAt: string;
   _version: number;
@@ -274,22 +244,29 @@ export type CreateChineseWordMutation = {
   character: string;
   pinyin: string;
   sound: string;
-  HSKLevel?: {
-    __typename: "HSKLevel";
-    id: string;
-    level?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
+  tags?: string | null;
+  Tags?: {
+    __typename: "ModelTagsConnection";
+    items: Array<{
+      __typename: "Tags";
+      id: string;
+      tagName?: string | null;
+      tagDescription?: string | null;
+      chinesewordID: string;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    } | null>;
+    nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
   _version: number;
   _deleted?: boolean | null;
   _lastChangedAt: number;
-  chineseWordHSKLevelId?: string | null;
 };
 
 export type UpdateChineseWordMutation = {
@@ -298,22 +275,29 @@ export type UpdateChineseWordMutation = {
   character: string;
   pinyin: string;
   sound: string;
-  HSKLevel?: {
-    __typename: "HSKLevel";
-    id: string;
-    level?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
+  tags?: string | null;
+  Tags?: {
+    __typename: "ModelTagsConnection";
+    items: Array<{
+      __typename: "Tags";
+      id: string;
+      tagName?: string | null;
+      tagDescription?: string | null;
+      chinesewordID: string;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    } | null>;
+    nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
   _version: number;
   _deleted?: boolean | null;
   _lastChangedAt: number;
-  chineseWordHSKLevelId?: string | null;
 };
 
 export type DeleteChineseWordMutation = {
@@ -322,28 +306,37 @@ export type DeleteChineseWordMutation = {
   character: string;
   pinyin: string;
   sound: string;
-  HSKLevel?: {
-    __typename: "HSKLevel";
-    id: string;
-    level?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
+  tags?: string | null;
+  Tags?: {
+    __typename: "ModelTagsConnection";
+    items: Array<{
+      __typename: "Tags";
+      id: string;
+      tagName?: string | null;
+      tagDescription?: string | null;
+      chinesewordID: string;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    } | null>;
+    nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
   _version: number;
   _deleted?: boolean | null;
   _lastChangedAt: number;
-  chineseWordHSKLevelId?: string | null;
 };
 
-export type GetHSKLevelQuery = {
-  __typename: "HSKLevel";
+export type GetTagsQuery = {
+  __typename: "Tags";
   id: string;
-  level?: string | null;
+  tagName?: string | null;
+  tagDescription?: string | null;
+  chinesewordID: string;
   createdAt: string;
   updatedAt: string;
   _version: number;
@@ -351,12 +344,14 @@ export type GetHSKLevelQuery = {
   _lastChangedAt: number;
 };
 
-export type ListHSKLevelsQuery = {
-  __typename: "ModelHSKLevelConnection";
+export type ListTagsQuery = {
+  __typename: "ModelTagsConnection";
   items: Array<{
-    __typename: "HSKLevel";
+    __typename: "Tags";
     id: string;
-    level?: string | null;
+    tagName?: string | null;
+    tagDescription?: string | null;
+    chinesewordID: string;
     createdAt: string;
     updatedAt: string;
     _version: number;
@@ -367,12 +362,14 @@ export type ListHSKLevelsQuery = {
   startedAt?: number | null;
 };
 
-export type SyncHSKLevelsQuery = {
-  __typename: "ModelHSKLevelConnection";
+export type SyncTagsQuery = {
+  __typename: "ModelTagsConnection";
   items: Array<{
-    __typename: "HSKLevel";
+    __typename: "Tags";
     id: string;
-    level?: string | null;
+    tagName?: string | null;
+    tagDescription?: string | null;
+    chinesewordID: string;
     createdAt: string;
     updatedAt: string;
     _version: number;
@@ -389,22 +386,29 @@ export type GetChineseWordQuery = {
   character: string;
   pinyin: string;
   sound: string;
-  HSKLevel?: {
-    __typename: "HSKLevel";
-    id: string;
-    level?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
+  tags?: string | null;
+  Tags?: {
+    __typename: "ModelTagsConnection";
+    items: Array<{
+      __typename: "Tags";
+      id: string;
+      tagName?: string | null;
+      tagDescription?: string | null;
+      chinesewordID: string;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    } | null>;
+    nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
   _version: number;
   _deleted?: boolean | null;
   _lastChangedAt: number;
-  chineseWordHSKLevelId?: string | null;
 };
 
 export type ListChineseWordsQuery = {
@@ -415,22 +419,17 @@ export type ListChineseWordsQuery = {
     character: string;
     pinyin: string;
     sound: string;
-    HSKLevel?: {
-      __typename: "HSKLevel";
-      id: string;
-      level?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
+    tags?: string | null;
+    Tags?: {
+      __typename: "ModelTagsConnection";
+      nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
     _version: number;
     _deleted?: boolean | null;
     _lastChangedAt: number;
-    chineseWordHSKLevelId?: string | null;
   } | null>;
   nextToken?: string | null;
   startedAt?: number | null;
@@ -444,31 +443,28 @@ export type SyncChineseWordsQuery = {
     character: string;
     pinyin: string;
     sound: string;
-    HSKLevel?: {
-      __typename: "HSKLevel";
-      id: string;
-      level?: string | null;
-      createdAt: string;
-      updatedAt: string;
-      _version: number;
-      _deleted?: boolean | null;
-      _lastChangedAt: number;
+    tags?: string | null;
+    Tags?: {
+      __typename: "ModelTagsConnection";
+      nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
     createdAt: string;
     updatedAt: string;
     _version: number;
     _deleted?: boolean | null;
     _lastChangedAt: number;
-    chineseWordHSKLevelId?: string | null;
   } | null>;
   nextToken?: string | null;
   startedAt?: number | null;
 };
 
-export type OnCreateHSKLevelSubscription = {
-  __typename: "HSKLevel";
+export type OnCreateTagsSubscription = {
+  __typename: "Tags";
   id: string;
-  level?: string | null;
+  tagName?: string | null;
+  tagDescription?: string | null;
+  chinesewordID: string;
   createdAt: string;
   updatedAt: string;
   _version: number;
@@ -476,10 +472,12 @@ export type OnCreateHSKLevelSubscription = {
   _lastChangedAt: number;
 };
 
-export type OnUpdateHSKLevelSubscription = {
-  __typename: "HSKLevel";
+export type OnUpdateTagsSubscription = {
+  __typename: "Tags";
   id: string;
-  level?: string | null;
+  tagName?: string | null;
+  tagDescription?: string | null;
+  chinesewordID: string;
   createdAt: string;
   updatedAt: string;
   _version: number;
@@ -487,10 +485,12 @@ export type OnUpdateHSKLevelSubscription = {
   _lastChangedAt: number;
 };
 
-export type OnDeleteHSKLevelSubscription = {
-  __typename: "HSKLevel";
+export type OnDeleteTagsSubscription = {
+  __typename: "Tags";
   id: string;
-  level?: string | null;
+  tagName?: string | null;
+  tagDescription?: string | null;
+  chinesewordID: string;
   createdAt: string;
   updatedAt: string;
   _version: number;
@@ -504,22 +504,29 @@ export type OnCreateChineseWordSubscription = {
   character: string;
   pinyin: string;
   sound: string;
-  HSKLevel?: {
-    __typename: "HSKLevel";
-    id: string;
-    level?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
+  tags?: string | null;
+  Tags?: {
+    __typename: "ModelTagsConnection";
+    items: Array<{
+      __typename: "Tags";
+      id: string;
+      tagName?: string | null;
+      tagDescription?: string | null;
+      chinesewordID: string;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    } | null>;
+    nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
   _version: number;
   _deleted?: boolean | null;
   _lastChangedAt: number;
-  chineseWordHSKLevelId?: string | null;
 };
 
 export type OnUpdateChineseWordSubscription = {
@@ -528,22 +535,29 @@ export type OnUpdateChineseWordSubscription = {
   character: string;
   pinyin: string;
   sound: string;
-  HSKLevel?: {
-    __typename: "HSKLevel";
-    id: string;
-    level?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
+  tags?: string | null;
+  Tags?: {
+    __typename: "ModelTagsConnection";
+    items: Array<{
+      __typename: "Tags";
+      id: string;
+      tagName?: string | null;
+      tagDescription?: string | null;
+      chinesewordID: string;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    } | null>;
+    nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
   _version: number;
   _deleted?: boolean | null;
   _lastChangedAt: number;
-  chineseWordHSKLevelId?: string | null;
 };
 
 export type OnDeleteChineseWordSubscription = {
@@ -552,37 +566,46 @@ export type OnDeleteChineseWordSubscription = {
   character: string;
   pinyin: string;
   sound: string;
-  HSKLevel?: {
-    __typename: "HSKLevel";
-    id: string;
-    level?: string | null;
-    createdAt: string;
-    updatedAt: string;
-    _version: number;
-    _deleted?: boolean | null;
-    _lastChangedAt: number;
+  tags?: string | null;
+  Tags?: {
+    __typename: "ModelTagsConnection";
+    items: Array<{
+      __typename: "Tags";
+      id: string;
+      tagName?: string | null;
+      tagDescription?: string | null;
+      chinesewordID: string;
+      createdAt: string;
+      updatedAt: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+    } | null>;
+    nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
   createdAt: string;
   updatedAt: string;
   _version: number;
   _deleted?: boolean | null;
   _lastChangedAt: number;
-  chineseWordHSKLevelId?: string | null;
 };
 
 @Injectable({
   providedIn: "root"
 })
 export class APIService {
-  async CreateHSKLevel(
-    input: CreateHSKLevelInput,
-    condition?: ModelHSKLevelConditionInput
-  ): Promise<CreateHSKLevelMutation> {
-    const statement = `mutation CreateHSKLevel($input: CreateHSKLevelInput!, $condition: ModelHSKLevelConditionInput) {
-        createHSKLevel(input: $input, condition: $condition) {
+  async CreateTags(
+    input: CreateTagsInput,
+    condition?: ModelTagsConditionInput
+  ): Promise<CreateTagsMutation> {
+    const statement = `mutation CreateTags($input: CreateTagsInput!, $condition: ModelTagsConditionInput) {
+        createTags(input: $input, condition: $condition) {
           __typename
           id
-          level
+          tagName
+          tagDescription
+          chinesewordID
           createdAt
           updatedAt
           _version
@@ -599,17 +622,19 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <CreateHSKLevelMutation>response.data.createHSKLevel;
+    return <CreateTagsMutation>response.data.createTags;
   }
-  async UpdateHSKLevel(
-    input: UpdateHSKLevelInput,
-    condition?: ModelHSKLevelConditionInput
-  ): Promise<UpdateHSKLevelMutation> {
-    const statement = `mutation UpdateHSKLevel($input: UpdateHSKLevelInput!, $condition: ModelHSKLevelConditionInput) {
-        updateHSKLevel(input: $input, condition: $condition) {
+  async UpdateTags(
+    input: UpdateTagsInput,
+    condition?: ModelTagsConditionInput
+  ): Promise<UpdateTagsMutation> {
+    const statement = `mutation UpdateTags($input: UpdateTagsInput!, $condition: ModelTagsConditionInput) {
+        updateTags(input: $input, condition: $condition) {
           __typename
           id
-          level
+          tagName
+          tagDescription
+          chinesewordID
           createdAt
           updatedAt
           _version
@@ -626,17 +651,19 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <UpdateHSKLevelMutation>response.data.updateHSKLevel;
+    return <UpdateTagsMutation>response.data.updateTags;
   }
-  async DeleteHSKLevel(
-    input: DeleteHSKLevelInput,
-    condition?: ModelHSKLevelConditionInput
-  ): Promise<DeleteHSKLevelMutation> {
-    const statement = `mutation DeleteHSKLevel($input: DeleteHSKLevelInput!, $condition: ModelHSKLevelConditionInput) {
-        deleteHSKLevel(input: $input, condition: $condition) {
+  async DeleteTags(
+    input: DeleteTagsInput,
+    condition?: ModelTagsConditionInput
+  ): Promise<DeleteTagsMutation> {
+    const statement = `mutation DeleteTags($input: DeleteTagsInput!, $condition: ModelTagsConditionInput) {
+        deleteTags(input: $input, condition: $condition) {
           __typename
           id
-          level
+          tagName
+          tagDescription
+          chinesewordID
           createdAt
           updatedAt
           _version
@@ -653,7 +680,7 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <DeleteHSKLevelMutation>response.data.deleteHSKLevel;
+    return <DeleteTagsMutation>response.data.deleteTags;
   }
   async CreateChineseWord(
     input: CreateChineseWordInput,
@@ -666,22 +693,29 @@ export class APIService {
           character
           pinyin
           sound
-          HSKLevel {
+          tags
+          Tags {
             __typename
-            id
-            level
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
+            items {
+              __typename
+              id
+              tagName
+              tagDescription
+              chinesewordID
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            nextToken
+            startedAt
           }
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          chineseWordHSKLevelId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -706,22 +740,29 @@ export class APIService {
           character
           pinyin
           sound
-          HSKLevel {
+          tags
+          Tags {
             __typename
-            id
-            level
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
+            items {
+              __typename
+              id
+              tagName
+              tagDescription
+              chinesewordID
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            nextToken
+            startedAt
           }
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          chineseWordHSKLevelId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -746,22 +787,29 @@ export class APIService {
           character
           pinyin
           sound
-          HSKLevel {
+          tags
+          Tags {
             __typename
-            id
-            level
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
+            items {
+              __typename
+              id
+              tagName
+              tagDescription
+              chinesewordID
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            nextToken
+            startedAt
           }
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          chineseWordHSKLevelId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -775,12 +823,14 @@ export class APIService {
     )) as any;
     return <DeleteChineseWordMutation>response.data.deleteChineseWord;
   }
-  async GetHSKLevel(id: string): Promise<GetHSKLevelQuery> {
-    const statement = `query GetHSKLevel($id: ID!) {
-        getHSKLevel(id: $id) {
+  async GetTags(id: string): Promise<GetTagsQuery> {
+    const statement = `query GetTags($id: ID!) {
+        getTags(id: $id) {
           __typename
           id
-          level
+          tagName
+          tagDescription
+          chinesewordID
           createdAt
           updatedAt
           _version
@@ -794,20 +844,22 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <GetHSKLevelQuery>response.data.getHSKLevel;
+    return <GetTagsQuery>response.data.getTags;
   }
-  async ListHSKLevels(
-    filter?: ModelHSKLevelFilterInput,
+  async ListTags(
+    filter?: ModelTagsFilterInput,
     limit?: number,
     nextToken?: string
-  ): Promise<ListHSKLevelsQuery> {
-    const statement = `query ListHSKLevels($filter: ModelHSKLevelFilterInput, $limit: Int, $nextToken: String) {
-        listHSKLevels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  ): Promise<ListTagsQuery> {
+    const statement = `query ListTags($filter: ModelTagsFilterInput, $limit: Int, $nextToken: String) {
+        listTags(filter: $filter, limit: $limit, nextToken: $nextToken) {
           __typename
           items {
             __typename
             id
-            level
+            tagName
+            tagDescription
+            chinesewordID
             createdAt
             updatedAt
             _version
@@ -831,21 +883,23 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <ListHSKLevelsQuery>response.data.listHSKLevels;
+    return <ListTagsQuery>response.data.listTags;
   }
-  async SyncHSKLevels(
-    filter?: ModelHSKLevelFilterInput,
+  async SyncTags(
+    filter?: ModelTagsFilterInput,
     limit?: number,
     nextToken?: string,
     lastSync?: number
-  ): Promise<SyncHSKLevelsQuery> {
-    const statement = `query SyncHSKLevels($filter: ModelHSKLevelFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-        syncHSKLevels(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+  ): Promise<SyncTagsQuery> {
+    const statement = `query SyncTags($filter: ModelTagsFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+        syncTags(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
           __typename
           items {
             __typename
             id
-            level
+            tagName
+            tagDescription
+            chinesewordID
             createdAt
             updatedAt
             _version
@@ -872,7 +926,7 @@ export class APIService {
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <SyncHSKLevelsQuery>response.data.syncHSKLevels;
+    return <SyncTagsQuery>response.data.syncTags;
   }
   async GetChineseWord(id: string): Promise<GetChineseWordQuery> {
     const statement = `query GetChineseWord($id: ID!) {
@@ -882,22 +936,29 @@ export class APIService {
           character
           pinyin
           sound
-          HSKLevel {
+          tags
+          Tags {
             __typename
-            id
-            level
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
+            items {
+              __typename
+              id
+              tagName
+              tagDescription
+              chinesewordID
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            nextToken
+            startedAt
           }
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          chineseWordHSKLevelId
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -922,22 +983,17 @@ export class APIService {
             character
             pinyin
             sound
-            HSKLevel {
+            tags
+            Tags {
               __typename
-              id
-              level
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
+              nextToken
+              startedAt
             }
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
-            chineseWordHSKLevelId
           }
           nextToken
           startedAt
@@ -973,22 +1029,17 @@ export class APIService {
             character
             pinyin
             sound
-            HSKLevel {
+            tags
+            Tags {
               __typename
-              id
-              level
-              createdAt
-              updatedAt
-              _version
-              _deleted
-              _lastChangedAt
+              nextToken
+              startedAt
             }
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
-            chineseWordHSKLevelId
           }
           nextToken
           startedAt
@@ -1012,210 +1063,195 @@ export class APIService {
     )) as any;
     return <SyncChineseWordsQuery>response.data.syncChineseWords;
   }
-  OnCreateHSKLevelListener(
-    filter?: ModelSubscriptionHSKLevelFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateHSKLevel">>
-  > {
-    const statement = `subscription OnCreateHSKLevel($filter: ModelSubscriptionHSKLevelFilterInput) {
-        onCreateHSKLevel(filter: $filter) {
+  OnCreateTagsListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateTags">>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateTags {
+        onCreateTags {
           __typename
           id
-          level
+          tagName
+          tagDescription
+          chinesewordID
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
         }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateHSKLevel">>
-    >;
-  }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateTags">>
+  >;
 
-  OnUpdateHSKLevelListener(
-    filter?: ModelSubscriptionHSKLevelFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateHSKLevel">>
-  > {
-    const statement = `subscription OnUpdateHSKLevel($filter: ModelSubscriptionHSKLevelFilterInput) {
-        onUpdateHSKLevel(filter: $filter) {
+  OnUpdateTagsListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateTags">>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateTags {
+        onUpdateTags {
           __typename
           id
-          level
+          tagName
+          tagDescription
+          chinesewordID
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
         }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateHSKLevel">>
-    >;
-  }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateTags">>
+  >;
 
-  OnDeleteHSKLevelListener(
-    filter?: ModelSubscriptionHSKLevelFilterInput
-  ): Observable<
-    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteHSKLevel">>
-  > {
-    const statement = `subscription OnDeleteHSKLevel($filter: ModelSubscriptionHSKLevelFilterInput) {
-        onDeleteHSKLevel(filter: $filter) {
+  OnDeleteTagsListener: Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteTags">>
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteTags {
+        onDeleteTags {
           __typename
           id
-          level
+          tagName
+          tagDescription
+          chinesewordID
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
         }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteHSKLevel">>
-    >;
-  }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteTags">>
+  >;
 
-  OnCreateChineseWordListener(
-    filter?: ModelSubscriptionChineseWordFilterInput
-  ): Observable<
+  OnCreateChineseWordListener: Observable<
     SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateChineseWord">>
-  > {
-    const statement = `subscription OnCreateChineseWord($filter: ModelSubscriptionChineseWordFilterInput) {
-        onCreateChineseWord(filter: $filter) {
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateChineseWord {
+        onCreateChineseWord {
           __typename
           id
           character
           pinyin
           sound
-          HSKLevel {
+          tags
+          Tags {
             __typename
-            id
-            level
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
+            items {
+              __typename
+              id
+              tagName
+              tagDescription
+              chinesewordID
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            nextToken
+            startedAt
           }
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          chineseWordHSKLevelId
         }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateChineseWord">>
-    >;
-  }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onCreateChineseWord">>
+  >;
 
-  OnUpdateChineseWordListener(
-    filter?: ModelSubscriptionChineseWordFilterInput
-  ): Observable<
+  OnUpdateChineseWordListener: Observable<
     SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateChineseWord">>
-  > {
-    const statement = `subscription OnUpdateChineseWord($filter: ModelSubscriptionChineseWordFilterInput) {
-        onUpdateChineseWord(filter: $filter) {
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateChineseWord {
+        onUpdateChineseWord {
           __typename
           id
           character
           pinyin
           sound
-          HSKLevel {
+          tags
+          Tags {
             __typename
-            id
-            level
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
+            items {
+              __typename
+              id
+              tagName
+              tagDescription
+              chinesewordID
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            nextToken
+            startedAt
           }
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          chineseWordHSKLevelId
         }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateChineseWord">>
-    >;
-  }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onUpdateChineseWord">>
+  >;
 
-  OnDeleteChineseWordListener(
-    filter?: ModelSubscriptionChineseWordFilterInput
-  ): Observable<
+  OnDeleteChineseWordListener: Observable<
     SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteChineseWord">>
-  > {
-    const statement = `subscription OnDeleteChineseWord($filter: ModelSubscriptionChineseWordFilterInput) {
-        onDeleteChineseWord(filter: $filter) {
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteChineseWord {
+        onDeleteChineseWord {
           __typename
           id
           character
           pinyin
           sound
-          HSKLevel {
+          tags
+          Tags {
             __typename
-            id
-            level
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
+            items {
+              __typename
+              id
+              tagName
+              tagDescription
+              chinesewordID
+              createdAt
+              updatedAt
+              _version
+              _deleted
+              _lastChangedAt
+            }
+            nextToken
+            startedAt
           }
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          chineseWordHSKLevelId
         }
-      }`;
-    const gqlAPIServiceArguments: any = {};
-    if (filter) {
-      gqlAPIServiceArguments.filter = filter;
-    }
-    return API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    ) as Observable<
-      SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteChineseWord">>
-    >;
-  }
+      }`
+    )
+  ) as Observable<
+    SubscriptionResponse<Pick<__SubscriptionContainer, "onDeleteChineseWord">>
+  >;
 }

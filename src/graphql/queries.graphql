@@ -1,8 +1,10 @@
 # this is an auto generated file. This will be overwritten
-query GetHSKLevel($id: ID!) {
-  getHSKLevel(id: $id) {
+query GetTags($id: ID!) {
+  getTags(id: $id) {
     id
-    level
+    tagName
+    tagDescription
+    chinesewordID
     createdAt
     updatedAt
     _version
@@ -10,15 +12,13 @@ query GetHSKLevel($id: ID!) {
     _lastChangedAt
   }
 }
-query ListHSKLevels(
-  $filter: ModelHSKLevelFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listHSKLevels(filter: $filter, limit: $limit, nextToken: $nextToken) {
+query ListTags($filter: ModelTagsFilterInput, $limit: Int, $nextToken: String) {
+  listTags(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      level
+      tagName
+      tagDescription
+      chinesewordID
       createdAt
       updatedAt
       _version
@@ -29,13 +29,13 @@ query ListHSKLevels(
     startedAt
   }
 }
-query SyncHSKLevels(
-  $filter: ModelHSKLevelFilterInput
+query SyncTags(
+  $filter: ModelTagsFilterInput
   $limit: Int
   $nextToken: String
   $lastSync: AWSTimestamp
 ) {
-  syncHSKLevels(
+  syncTags(
     filter: $filter
     limit: $limit
     nextToken: $nextToken
@@ -43,7 +43,9 @@ query SyncHSKLevels(
   ) {
     items {
       id
-      level
+      tagName
+      tagDescription
+      chinesewordID
       createdAt
       updatedAt
       _version
@@ -60,21 +62,27 @@ query GetChineseWord($id: ID!) {
     character
     pinyin
     sound
-    HSKLevel {
-      id
-      level
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
+    tags
+    Tags {
+      items {
+        id
+        tagName
+        tagDescription
+        chinesewordID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
     }
     createdAt
     updatedAt
     _version
     _deleted
     _lastChangedAt
-    chineseWordHSKLevelId
   }
 }
 query ListChineseWords(
@@ -88,21 +96,16 @@ query ListChineseWords(
       character
       pinyin
       sound
-      HSKLevel {
-        id
-        level
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
+      tags
+      Tags {
+        nextToken
+        startedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      chineseWordHSKLevelId
     }
     nextToken
     startedAt
@@ -125,21 +128,16 @@ query SyncChineseWords(
       character
       pinyin
       sound
-      HSKLevel {
-        id
-        level
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
+      tags
+      Tags {
+        nextToken
+        startedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      chineseWordHSKLevelId
     }
     nextToken
     startedAt

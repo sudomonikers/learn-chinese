@@ -1,6 +1,8 @@
-type HSKLevel @model @auth(rules: [{allow: public}]) {
+type Tags @model @auth(rules: [{allow: public}]) {
   id: ID!
-  level: String
+  tagName: String
+  tagDescription: String
+  chinesewordID: ID! @index(name: "byChineseWord")
 }
 
 type ChineseWord @model @auth(rules: [{allow: public}]) {
@@ -8,6 +10,6 @@ type ChineseWord @model @auth(rules: [{allow: public}]) {
   character: String!
   pinyin: String!
   sound: AWSURL!
-  HSKLevel: HSKLevel @hasOne
-}
- 
+  tags: AWSJSON
+  Tags: [Tags] @hasMany(indexName: "byChineseWord", fields: ["id"])
+} 

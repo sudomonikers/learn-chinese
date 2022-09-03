@@ -4,9 +4,9 @@ import { schema } from './schema';
 
 
 
-const { HSKLevel, ChineseWord } = initSchema(schema);
+const { Tags, ChineseWord } = initSchema(schema);
 
 export {
-  HSKLevel,
+  Tags,
   ChineseWord
 };

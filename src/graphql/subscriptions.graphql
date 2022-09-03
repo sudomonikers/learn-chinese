@@ -1,8 +1,10 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateHSKLevel($filter: ModelSubscriptionHSKLevelFilterInput) {
-  onCreateHSKLevel(filter: $filter) {
+subscription OnCreateTags {
+  onCreateTags {
     id
-    level
+    tagName
+    tagDescription
+    chinesewordID
     createdAt
     updatedAt
     _version
@@ -10,10 +12,12 @@ subscription OnCreateHSKLevel($filter: ModelSubscriptionHSKLevelFilterInput) {
     _lastChangedAt
   }
 }
-subscription OnUpdateHSKLevel($filter: ModelSubscriptionHSKLevelFilterInput) {
-  onUpdateHSKLevel(filter: $filter) {
+subscription OnUpdateTags {
+  onUpdateTags {
     id
-    level
+    tagName
+    tagDescription
+    chinesewordID
     createdAt
     updatedAt
     _version
@@ -21,10 +25,12 @@ subscription OnUpdateHSKLevel($filter: ModelSubscriptionHSKLevelFilterInput) {
     _lastChangedAt
   }
 }
-subscription OnDeleteHSKLevel($filter: ModelSubscriptionHSKLevelFilterInput) {
-  onDeleteHSKLevel(filter: $filter) {
+subscription OnDeleteTags {
+  onDeleteTags {
     id
-    level
+    tagName
+    tagDescription
+    chinesewordID
     createdAt
     updatedAt
     _version
@@ -32,78 +38,90 @@ subscription OnDeleteHSKLevel($filter: ModelSubscriptionHSKLevelFilterInput) {
     _lastChangedAt
   }
 }
-subscription OnCreateChineseWord(
-  $filter: ModelSubscriptionChineseWordFilterInput
-) {
-  onCreateChineseWord(filter: $filter) {
+subscription OnCreateChineseWord {
+  onCreateChineseWord {
     id
     character
     pinyin
     sound
-    HSKLevel {
-      id
-      level
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
+    tags
+    Tags {
+      items {
+        id
+        tagName
+        tagDescription
+        chinesewordID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
     }
     createdAt
     updatedAt
     _version
     _deleted
     _lastChangedAt
-    chineseWordHSKLevelId
   }
 }
-subscription OnUpdateChineseWord(
-  $filter: ModelSubscriptionChineseWordFilterInput
-) {
-  onUpdateChineseWord(filter: $filter) {
+subscription OnUpdateChineseWord {
+  onUpdateChineseWord {
     id
     character
     pinyin
     sound
-    HSKLevel {
-      id
-      level
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
+    tags
+    Tags {
+      items {
+        id
+        tagName
+        tagDescription
+        chinesewordID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
     }
     createdAt
     updatedAt
     _version
     _deleted
     _lastChangedAt
-    chineseWordHSKLevelId
   }
 }
-subscription OnDeleteChineseWord(
-  $filter: ModelSubscriptionChineseWordFilterInput
-) {
-  onDeleteChineseWord(filter: $filter) {
+subscription OnDeleteChineseWord {
+  onDeleteChineseWord {
     id
     character
     pinyin
     sound
-    HSKLevel {
-      id
-      level
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
+    tags
+    Tags {
+      items {
+        id
+        tagName
+        tagDescription
+        chinesewordID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
     }
     createdAt
     updatedAt
     _version
     _deleted
     _lastChangedAt
-    chineseWordHSKLevelId
   }
 }

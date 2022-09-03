@@ -1,11 +1,13 @@
 # this is an auto generated file. This will be overwritten
-mutation CreateHSKLevel(
-  $input: CreateHSKLevelInput!
-  $condition: ModelHSKLevelConditionInput
+mutation CreateTags(
+  $input: CreateTagsInput!
+  $condition: ModelTagsConditionInput
 ) {
-  createHSKLevel(input: $input, condition: $condition) {
+  createTags(input: $input, condition: $condition) {
     id
-    level
+    tagName
+    tagDescription
+    chinesewordID
     createdAt
     updatedAt
     _version
@@ -13,13 +15,15 @@ mutation CreateHSKLevel(
     _lastChangedAt
   }
 }
-mutation UpdateHSKLevel(
-  $input: UpdateHSKLevelInput!
-  $condition: ModelHSKLevelConditionInput
+mutation UpdateTags(
+  $input: UpdateTagsInput!
+  $condition: ModelTagsConditionInput
 ) {
-  updateHSKLevel(input: $input, condition: $condition) {
+  updateTags(input: $input, condition: $condition) {
     id
-    level
+    tagName
+    tagDescription
+    chinesewordID
     createdAt
     updatedAt
     _version
@@ -27,13 +31,15 @@ mutation UpdateHSKLevel(
     _lastChangedAt
   }
 }
-mutation DeleteHSKLevel(
-  $input: DeleteHSKLevelInput!
-  $condition: ModelHSKLevelConditionInput
+mutation DeleteTags(
+  $input: DeleteTagsInput!
+  $condition: ModelTagsConditionInput
 ) {
-  deleteHSKLevel(input: $input, condition: $condition) {
+  deleteTags(input: $input, condition: $condition) {
     id
-    level
+    tagName
+    tagDescription
+    chinesewordID
     createdAt
     updatedAt
     _version
@@ -50,21 +56,27 @@ mutation CreateChineseWord(
     character
     pinyin
     sound
-    HSKLevel {
-      id
-      level
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
+    tags
+    Tags {
+      items {
+        id
+        tagName
+        tagDescription
+        chinesewordID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
     }
     createdAt
     updatedAt
     _version
     _deleted
     _lastChangedAt
-    chineseWordHSKLevelId
   }
 }
 mutation UpdateChineseWord(
@@ -76,21 +88,27 @@ mutation UpdateChineseWord(
     character
     pinyin
     sound
-    HSKLevel {
-      id
-      level
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
+    tags
+    Tags {
+      items {
+        id
+        tagName
+        tagDescription
+        chinesewordID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
     }
     createdAt
     updatedAt
     _version
     _deleted
     _lastChangedAt
-    chineseWordHSKLevelId
   }
 }
 mutation DeleteChineseWord(
@@ -102,20 +120,26 @@ mutation DeleteChineseWord(
     character
     pinyin
     sound
-    HSKLevel {
-      id
-      level
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
+    tags
+    Tags {
+      items {
+        id
+        tagName
+        tagDescription
+        chinesewordID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
     }
     createdAt
     updatedAt
     _version
     _deleted
     _lastChangedAt
-    chineseWordHSKLevelId
   }
 }

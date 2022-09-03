@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "HSKLevel": {
-            "name": "HSKLevel",
+        "Tags": {
+            "name": "Tags",
             "fields": {
                 "id": {
                     "name": "id",
@@ -10,11 +10,25 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "level": {
-                    "name": "level",
+                "tagName": {
+                    "name": "tagName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
+                    "attributes": []
+                },
+                "tagDescription": {
+                    "name": "tagDescription",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "chinesewordID": {
+                    "name": "chinesewordID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "createdAt": {
@@ -35,11 +49,20 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "HSKLevels",
+            "pluralName": "Tags",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byChineseWord",
+                        "fields": [
+                            "chinesewordID"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -90,18 +113,25 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "HSKLevel": {
-                    "name": "HSKLevel",
+                "tags": {
+                    "name": "tags",
                     "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Tags": {
+                    "name": "Tags",
+                    "isArray": true,
                     "type": {
-                        "model": "HSKLevel"
+                        "model": "Tags"
                     },
                     "isRequired": false,
                     "attributes": [],
+                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
-                        "targetName": "chineseWordHskLevelId"
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "chinesewordID"
                     }
                 },
                 "createdAt": {
@@ -119,13 +149,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
-                },
-                "chineseWordHskLevelId": {
-                    "name": "chineseWordHskLevelId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
                 }
             },
             "syncable": true,
@@ -156,5 +179,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "e14d5d6d1f66ad4b40c3c1f30854abd3"
+    "version": "978596677fbbf93d40e9fd06d8a15325"
 };
