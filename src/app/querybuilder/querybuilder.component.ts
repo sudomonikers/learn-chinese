@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { APIService } from '../API.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-querybuilder',
@@ -8,9 +8,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./querybuilder.component.scss']
 })
 export class QuerybuilderComponent implements OnInit {
-  queryBuilder: FormGroup;
+  queryBuilder: UntypedFormGroup;
 
-  constructor(private api: APIService, private formBuilder: FormBuilder) {
+  constructor(private api: APIService, private formBuilder: UntypedFormBuilder) {
     this.queryBuilder = this.formBuilder.group({
       tags: ['']
     })
