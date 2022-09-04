@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { APIService } from '../API.service';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { ApiResponseService } from '../shared/api-response.service';
 
 @Component({
   selector: 'app-querybuilder',
@@ -14,7 +15,7 @@ export class QuerybuilderComponent implements OnInit, OnDestroy {
   selectedTag: string = '';
   subscription: Subscription;
 
-  constructor(private api: APIService, private formBuilder: UntypedFormBuilder) {
+  constructor(private api: APIService, private formBuilder: UntypedFormBuilder, private apiResponseService: ApiResponseService) {
     this.tags = [
       'HSK 1',
       'HSK 2',
@@ -28,7 +29,9 @@ export class QuerybuilderComponent implements OnInit, OnDestroy {
       tags: ['']
     });
     this.subscription = this.queryBuilder.valueChanges.subscribe((change) => {
-      console.log(change)
+      this.api.ListChineseWords({tags: {contains: change.tags}}).then((response) => {
+        this.apiResponseService.response.next(response);
+      });
     })
    }
 
@@ -40,8 +43,8 @@ export class QuerybuilderComponent implements OnInit, OnDestroy {
   }
 
   query(): void {
-    this.api.ListChineseWords().then((response) => {
+    this.api.ListChineseWords({tags: {contains: "HSK 1"}}).then((response) => {
       console.log(response)
-    })
+    });
   }
 }

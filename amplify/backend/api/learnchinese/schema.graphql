@@ -10,6 +10,7 @@ type ChineseWord @model @auth(rules: [{allow: public}]) {
   character: String!
   pinyin: String!
   sound: AWSURL!
-  tags: AWSJSON
+  tags: String
   Tags: [Tags] @hasMany(indexName: "byChineseWord", fields: ["id"])
-} 
+}
+ 

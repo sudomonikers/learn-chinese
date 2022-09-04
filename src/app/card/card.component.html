@@ -1,0 +1,11 @@
+<div class="card" (click)="flipCard()" [@cardFlip]="state"> 
+    <div class="face back">
+        <span>{{ character }}</span>
+        <span>{{ sound }}</span>
+    </div>
+    <div class="face front">
+        <span>{{ pinyin }}</span>
+        <span>{{ sound }}</span>
+    </div>
+</div>
+

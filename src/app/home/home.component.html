@@ -1,3 +1,10 @@
 <app-nav></app-nav>
-<app-querybuilder></app-querybuilder>
-<app-card></app-card>
+<div class="container">
+    <app-querybuilder></app-querybuilder>
+    <app-card 
+        *ngFor="let item of response.items" 
+        [character]="item.character" 
+        [pinyin]="item.pinyin" 
+        [sound]="item.sound">
+    </app-card>    
+</div>
