@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DropdownModule } from 'primeng/dropdown';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -20,7 +23,10 @@ import { QuerybuilderComponent } from './querybuilder/querybuilder.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]
