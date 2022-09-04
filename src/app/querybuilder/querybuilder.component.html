@@ -1,6 +1,8 @@
 <div class="container">
     <form class="querybuilder" [formGroup]="queryBuilder">
-        <p-dropdown [options]="tags" formControlName="tags" optionLabel="name"></p-dropdown>
+        <select formControlName="tags">
+            <option *ngFor="let tag of tags" value="{{ tag }}">{{ tag }}</option>
+        </select>
         <button (click)="query()">Query</button>
     </form>
 </div>
